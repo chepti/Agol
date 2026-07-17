@@ -8,6 +8,7 @@ import PlayView from './views/PlayView';
 import ProgressView from './views/ProgressView';
 import Teacher from './views/Teacher';
 import PathEdit from './views/PathEdit';
+import TraceEdit from './views/TraceEdit';
 import { trackPage } from './lib/analytics';
 
 // ניתוב מבוסס hash — עובד בכל אחסון סטטי בלי הגדרות שרת.
@@ -72,6 +73,8 @@ export default function App() {
   let view: React.ReactNode;
   if (route === 'path-edit') {
     view = <PathEdit />;
+  } else if (route === 'trace-edit') {
+    view = <TraceEdit />;
   } else if (route === 'teacher') {
     view = <Teacher />;
   } else if (route === 'join') {

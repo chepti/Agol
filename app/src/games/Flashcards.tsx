@@ -76,7 +76,7 @@ export default function Flashcards({
     <div style={{ textAlign: 'center' }}>
       <ProgressDots total={activity.cards.length} done={idx} />
       <div key={idx} style={{ display: 'flex', justifyContent: 'center', margin: '10px 0 20px' }}>
-        <AgolCard text={card.text} size={card.text.length > 8 ? 36 : 56} />
+        <AgolCard text={card.text} size={card.text.length > 8 ? 48 : 76} />
       </div>
       <form
         onSubmit={(e) => {

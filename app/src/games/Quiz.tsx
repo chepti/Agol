@@ -49,7 +49,7 @@ export default function Quiz({
       <p style={{ fontSize: 18, fontWeight: 500 }}>{q.prompt}</p>
       {q.agolText && (
         <div key={idx} style={{ display: 'flex', justifyContent: 'center', margin: '14px 0 22px' }}>
-          <AgolCard text={q.agolText} size={q.agolText.length > 6 ? 40 : 58} />
+          <AgolCard text={q.agolText} size={q.agolText.length > 6 ? 52 : 78} />
         </div>
       )}
       <div
@@ -68,14 +68,15 @@ export default function Quiz({
             <button
               key={i}
               onClick={() => choose(i)}
+              className={chosen === i && i === q.correct ? 'bounce-soft' : ''}
               style={{
                 background: bg,
-                border: `2px solid ${border}`,
-                borderRadius: 14,
-                padding: '14px 26px',
-                fontSize: 22,
+                border: `3px solid ${border}`,
+                borderRadius: 16,
+                padding: '18px 34px',
+                fontSize: 26,
                 fontWeight: 700,
-                minWidth: 110,
+                minWidth: 130,
                 transition: 'all 0.15s',
               }}
             >

@@ -84,9 +84,9 @@ export default function Memory({
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: `repeat(auto-fill, minmax(${long ? 150 : 110}px, 1fr))`,
-          gap: 10,
-          maxWidth: 640,
+          gridTemplateColumns: `repeat(auto-fill, minmax(${long ? 172 : 132}px, 1fr))`,
+          gap: 12,
+          maxWidth: 720,
           margin: '0 auto',
         }}
       >
@@ -97,20 +97,20 @@ export default function Memory({
             <button
               key={card.id}
               onClick={() => flip(card)}
-              className={card.agol && isOpen ? 'agol-font' : ''}
+              className={`${card.agol && isOpen ? 'agol-font ' : ''}${isOpen ? 'flip-in' : ''}`}
               style={{
-                minHeight: 84,
-                borderRadius: 12,
-                border: `2px solid ${isMatched ? 'var(--green)' : isOpen ? 'var(--teal)' : '#0f766e'}`,
+                minHeight: 104,
+                borderRadius: 16,
+                border: `2.5px solid ${isMatched ? 'var(--green)' : isOpen ? 'var(--teal)' : '#0f766e'}`,
                 background: isMatched
                   ? 'var(--green-soft)'
                   : isOpen
                     ? card.agol ? 'linear-gradient(160deg,#f4fbff,#d7eefb)' : '#fff'
                     : 'linear-gradient(150deg, var(--teal), var(--teal-dark))',
                 color: isOpen ? 'var(--ink)' : '#fff',
-                fontSize: isOpen ? (card.text.length > 10 ? 15 : card.agol ? 26 : 18) : 30,
+                fontSize: isOpen ? (card.text.length > 10 ? 18 : card.agol ? 34 : 22) : 38,
                 fontWeight: isOpen && !card.agol ? 700 : 400,
-                padding: 8,
+                padding: 10,
                 lineHeight: 1.3,
                 transition: 'all 0.25s',
               }}

@@ -39,22 +39,22 @@ export function starsFor(score: number, max: number): number {
   return 1;
 }
 
-/** טקסט גדול בכתב רש"י על "קלף" */
-export function AgolCard({ text, size = 54 }: { text: string; size?: number }) {
+/** טקסט גדול בכתב יד על "קלף" — גדול וממורכז עם כניסה קופצת */
+export function AgolCard({ text, size = 72 }: { text: string; size?: number }) {
   return (
     <div
-      className="agol-font pop-in"
+      className="agol-font card-in"
       style={{
         background: 'linear-gradient(160deg, #f4fbff, #d7eefb)',
-        border: '2px solid #a9d8ee',
-        borderRadius: 18,
-        padding: '30px 34px',
+        border: '3px solid #a9d8ee',
+        borderRadius: 24,
+        padding: '44px 44px',
         fontSize: size,
         textAlign: 'center',
-        minWidth: 200,
+        minWidth: 260,
         maxWidth: '100%',
         lineHeight: 1.4,
-        boxShadow: 'var(--shadow)',
+        boxShadow: 'var(--shadow-lg)',
         direction: 'rtl',
       }}
     >

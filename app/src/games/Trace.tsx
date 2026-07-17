@@ -4,6 +4,7 @@ import { addLetterEvent } from '../lib/mastery';
 import { playCorrect, playWin } from '../lib/sound';
 import { ProgressDots } from './ui';
 import { RotateCcw, Eraser } from '../ui/icons';
+import { getLetterStrokes } from '../data/strokes';
 
 // ציור אותיות: מציירים על תבנית האות עם אצבע/עכבר.
 // כלי עזר: הדגמה מונפשת של כיוון הכתיבה (מלמעלה למטה) לפני שמתחילים.
@@ -56,17 +57,24 @@ function buildMask(letter: string): Mask {
     if (t[i * 4 + 3] > 30) tolerant[i] = 1;
   }
 
-  // שלד: לכל שורה ה-x החציוני, מדוגמם ל~36 נקודות מלמעלה למטה
-  const raw: Pt[] = [];
-  for (let y = top; y <= bottom; y++) {
-    const xs = rowXs[y];
-    if (xs.length) { xs.sort((a, b) => a - b); raw.push({ x: xs[(xs.length / 2) | 0], y }); }
-  }
-  const N = 36;
-  const skeleton: Pt[] = [];
-  for (let k = 0; k < N; k++) {
-    const idx = Math.min(raw.length - 1, Math.round((k / (N - 1)) * (raw.length - 1)));
-    skeleton.push(raw[idx] || { x: SIZE / 2, y: top });
+  // מסלול מודגם: אם יש מסלול מצויר לאות — משתמשים בו (סדר וכיוון אמיתיים);
+  // אחרת שלד אוטומטי — לכל שורה ה-x החציוני, מלמעלה למטה.
+  const authored = getLetterStrokes(letter);
+  let skeleton: Pt[];
+  if (authored && authored.length) {
+    skeleton = authored.flat().map(([nx, ny]) => ({ x: nx * SIZE, y: ny * SIZE }));
+  } else {
+    const raw: Pt[] = [];
+    for (let y = top; y <= bottom; y++) {
+      const xs = rowXs[y];
+      if (xs.length) { xs.sort((a, b) => a - b); raw.push({ x: xs[(xs.length / 2) | 0], y }); }
+    }
+    const N = 36;
+    skeleton = [];
+    for (let k = 0; k < N; k++) {
+      const idx = Math.min(raw.length - 1, Math.round((k / (N - 1)) * (raw.length - 1)));
+      skeleton.push(raw[idx] || { x: SIZE / 2, y: top });
+    }
   }
   return { glyph, tolerant, glyphCount, bboxTop: top, bboxHeight: Math.max(1, bottom - top), skeleton };
 }
@@ -235,7 +243,9 @@ export default function Trace({
     const { coverage, stray } = measure();
     setFillPct(Math.round(coverage * 100));
     const fp = firstPointRef.current;
-    const startedTop = !!fp && fp.y <= maskRef.current!.bboxTop + maskRef.current!.bboxHeight * 0.5;
+    // התחלה נכונה = קרוב לנקודה הירוקה (ראש המסלול)
+    const start = maskRef.current!.skeleton[0];
+    const startedTop = !!fp && Math.hypot(fp.x - start.x, fp.y - start.y) <= SIZE * 0.3;
 
     if (coverage >= COVER_PASS && stray <= STRAY_MAX && startedTop) {
       setDone(true);
@@ -259,7 +269,7 @@ export default function Trace({
     firstTryRef.current = false;
     if (coverage >= COVER_PASS && !startedTop) {
       addLetterEvent(events.current, letter, false);
-      setHint('כותבים מלמעלה למטה — התחילו בנקודה הירוקה 👆');
+      setHint('התחילו מהנקודה הירוקה ולכו לפי ההדגמה 👆');
       setTimeout(clearInk, 950);
     } else if (coverage >= COVER_PASS && stray > STRAY_MAX) {
       setHint('כמעט! נסו להישאר על האות (הקו הכתום יצא החוצה).');

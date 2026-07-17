@@ -3,12 +3,6 @@ import React from 'react';
 /** רקעים רכים לעמודי תוכן — מתחלפים לפי מפתח */
 export const SOFT_BGS = [
   '/agol/bg-pages.webp',
-  '/agol/bg-soft-circle.webp',
-  '/agol/bg-soft-meadow.webp',
-  '/agol/bg-soft-blossom.webp',
-  '/agol/bg-soft-sunset.webp',
-  '/agol/bg-cottage.webp',
-  '/agol/bg-join.webp',
 ] as const;
 
 export function pickSoftBg(seed = ''): string {
