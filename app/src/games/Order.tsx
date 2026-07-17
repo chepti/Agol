@@ -109,8 +109,8 @@ export default function Order({
               height: 56,
               fontSize: 32,
               borderRadius: 10,
-              background: wrongCh === ch ? 'var(--red-soft)' : 'linear-gradient(160deg,#fffdf5,#fdf6e3)',
-              border: `2px solid ${wrongCh === ch ? 'var(--red)' : '#e7d9b0'}`,
+              background: wrongCh === ch ? 'var(--red-soft)' : 'linear-gradient(160deg,#f4fbff,#d7eefb)',
+              border: `2px solid ${wrongCh === ch ? 'var(--red)' : '#a9d8ee'}`,
               transition: 'all 0.15s',
             }}
           >

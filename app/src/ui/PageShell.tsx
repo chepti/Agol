@@ -23,8 +23,8 @@ export function SoftPageShell({
   children,
   image,
   seed,
-  opacity = 0.38,
-  overlay = 'rgba(248, 245, 238, 0.55)',
+  opacity = 0.34,
+  overlay = 'rgba(226, 244, 252, 0.55)',
 }: {
   children: React.ReactNode;
   image?: string;

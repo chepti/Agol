@@ -38,10 +38,10 @@ export default function Intro({
               key={ch}
               onClick={() => flip(ch)}
               style={{
-                border: isFlipped ? '2px solid var(--teal)' : '2px solid #e7d9b0',
+                border: isFlipped ? '2px solid var(--teal)' : '2px solid #a9d8ee',
                 borderRadius: 16,
                 padding: '16px 8px',
-                background: isFlipped ? 'var(--teal-soft)' : 'linear-gradient(160deg,#fffdf5,#fdf6e3)',
+                background: isFlipped ? 'var(--teal-soft)' : 'linear-gradient(160deg,#f4fbff,#d7eefb)',
                 minHeight: 150,
                 display: 'flex',
                 flexDirection: 'column',

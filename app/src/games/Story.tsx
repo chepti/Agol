@@ -134,8 +134,8 @@ export default function Story({
         onPointerUp={() => (dragging.current = false)}
         style={{
           position: 'relative',
-          background: 'linear-gradient(160deg,#fffdf5,#fdf6e3)',
-          border: '2px solid #e7d9b0',
+          background: 'linear-gradient(160deg,#f4fbff,#d7eefb)',
+          border: '2px solid #a9d8ee',
           borderRadius: 18,
           overflow: 'hidden',
           touchAction: 'none',

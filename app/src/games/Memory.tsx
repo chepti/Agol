@@ -105,7 +105,7 @@ export default function Memory({
                 background: isMatched
                   ? 'var(--green-soft)'
                   : isOpen
-                    ? card.agol ? 'linear-gradient(160deg,#fffdf5,#fdf6e3)' : '#fff'
+                    ? card.agol ? 'linear-gradient(160deg,#f4fbff,#d7eefb)' : '#fff'
                     : 'linear-gradient(150deg, var(--teal), var(--teal-dark))',
                 color: isOpen ? 'var(--ink)' : '#fff',
                 fontSize: isOpen ? (card.text.length > 10 ? 15 : card.agol ? 26 : 18) : 30,
