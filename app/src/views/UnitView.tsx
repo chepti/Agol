@@ -16,6 +16,7 @@ const TYPE_COLORS: Record<string, string> = {
   story: '#a16207',
   order: '#16a34a',
   paint: '#e05252',
+  trace: '#0f766e',
   quiz: '#d97706',
 };
 

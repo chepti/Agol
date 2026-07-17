@@ -69,6 +69,9 @@ for (const unit of UNITS) {
       case 'paint':
         act.steps.forEach((s, i) => check(unit.title, act.id, `step ${i + 1}`, s.text));
         break;
+      case 'trace':
+        act.letters.forEach((l) => check(unit.title, act.id, 'trace-letter', l));
+        break;
     }
   }
 }

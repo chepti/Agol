@@ -10,6 +10,7 @@ import Memory from './Memory';
 import Story from './Story';
 import Order from './Order';
 import Paint from './Paint';
+import Trace from './Trace';
 import { Stars, starsFor } from './ui';
 import { playWin } from '../lib/sound';
 
@@ -66,6 +67,7 @@ export default function GameHost({
       case 'story': return <Story activity={activity} onFinish={finish} />;
       case 'order': return <Order activity={activity} onFinish={finish} />;
       case 'paint': return <Paint activity={activity} onFinish={finish} />;
+      case 'trace': return <Trace activity={activity} onFinish={finish} />;
     }
   };
 

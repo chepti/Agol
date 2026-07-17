@@ -81,6 +81,14 @@ export interface PaintActivity {
   revealEmoji: string; // מה מתקבל בציור
 }
 
+export interface TraceActivity {
+  type: 'trace';
+  id: string;
+  title: string;
+  instructions: string;
+  letters: string[]; // האותיות לעקיבה, בסדר — מציירים עליהן עם אצבע/עכבר
+}
+
 export interface QuizQuestion {
   prompt: string;        // טקסט השאלה (כתב רגיל)
   agolText?: string;    // טקסט להצגה בכתב רש"י
@@ -106,6 +114,7 @@ export type Activity =
   | StoryActivity
   | OrderActivity
   | PaintActivity
+  | TraceActivity
   | QuizActivity;
 
 export interface Unit {

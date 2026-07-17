@@ -24,6 +24,13 @@ export const UNITS: Unit[] = [
         letters: ['י', 'ו', 'ן'],
       },
       {
+        type: 'trace',
+        id: 'kavim-trace',
+        title: 'עקבו על האותיות',
+        instructions: 'ציירו עם האצבע או העכבר על כל אות — מתחילים בנקודה הירוקה, מלמעלה למטה!',
+        letters: ['י', 'ו', 'ן'],
+      },
+      {
         type: 'quiz',
         id: 'kavim-quiz',
         title: 'קצר או ארוך?',
@@ -53,6 +60,13 @@ export const UNITS: Unit[] = [
         id: 'nun-intro',
         title: "מכירים את נ' ר' ה'",
         instructions: 'עוד שלוש אותיות פשוטות. התבוננו היטב בצורת כתב היד של כל אחת.',
+        letters: ['נ', 'ר', 'ה'],
+      },
+      {
+        type: 'trace',
+        id: 'nun-trace',
+        title: 'עקבו על האותיות',
+        instructions: 'ציירו עם האצבע או העכבר על כל אות — מתחילים בנקודה הירוקה, מלמעלה למטה!',
         letters: ['נ', 'ר', 'ה'],
       },
       {
@@ -104,6 +118,13 @@ export const UNITS: Unit[] = [
         letters: ['ח', 'ק', 'ת'],
       },
       {
+        type: 'trace',
+        id: 'chet-trace',
+        title: 'עקבו על האותיות',
+        instructions: 'ציירו עם האצבע או העכבר על כל אות — מתחילים בנקודה הירוקה, מלמעלה למטה!',
+        letters: ['ח', 'ק', 'ת'],
+      },
+      {
         type: 'flashcards',
         id: 'chet-cards',
         title: 'פענחו את המילים',
@@ -144,6 +165,13 @@ export const UNITS: Unit[] = [
         id: 'samech-intro',
         title: "מכירים את ס' כ' א'",
         instructions: 'אותיות עגולות! שימו לב להבדל בין ס׳ הסגורה ל-כ׳ הפתוחה, והכירו גם את ך׳ הסופית.',
+        letters: ['ס', 'כ', 'ך', 'א'],
+      },
+      {
+        type: 'trace',
+        id: 'samech-trace',
+        title: 'עקבו על האותיות',
+        instructions: 'ציירו עם האצבע או העכבר על כל אות — מתחילים בנקודה הירוקה, מלמעלה למטה!',
         letters: ['ס', 'כ', 'ך', 'א'],
       },
       {
@@ -194,6 +222,13 @@ export const UNITS: Unit[] = [
         letters: ['ב', 'ג', 'ד'],
       },
       {
+        type: 'trace',
+        id: 'bet-trace',
+        title: 'עקבו על האותיות',
+        instructions: 'ציירו עם האצבע או העכבר על כל אות — מתחילים בנקודה הירוקה, מלמעלה למטה!',
+        letters: ['ב', 'ג', 'ד'],
+      },
+      {
         type: 'flashcards',
         id: 'bet-cards',
         title: 'פענחו את המילים',
@@ -239,6 +274,13 @@ export const UNITS: Unit[] = [
         id: 'mem-intro',
         title: "מכירים את מ' ם'",
         instructions: 'שימו לב: ם׳ סופית בכתב יד היא עיגול סגור — כמעט כמו ס׳! הבחינו בהבדל.',
+        letters: ['מ', 'ם'],
+      },
+      {
+        type: 'trace',
+        id: 'mem-trace',
+        title: 'עקבו על האותיות',
+        instructions: 'ציירו עם האצבע או העכבר על כל אות — מתחילים בנקודה הירוקה, מלמעלה למטה!',
         letters: ['מ', 'ם'],
       },
       {
@@ -295,6 +337,13 @@ export const UNITS: Unit[] = [
         letters: ['ע', 'ט', 'ש'],
       },
       {
+        type: 'trace',
+        id: 'ayin-trace',
+        title: 'עקבו על האותיות',
+        instructions: 'ציירו עם האצבע או העכבר על כל אות — מתחילים בנקודה הירוקה, מלמעלה למטה!',
+        letters: ['ע', 'ט', 'ש'],
+      },
+      {
         type: 'flashcards',
         id: 'ayin-cards',
         title: 'פענחו את המילים',
@@ -343,6 +392,13 @@ export const UNITS: Unit[] = [
         letters: ['ז', 'ג'],
       },
       {
+        type: 'trace',
+        id: 'zayin-trace',
+        title: 'עקבו על האותיות',
+        instructions: 'ציירו עם האצבע או העכבר על כל אות — מתחילים בנקודה הירוקה, מלמעלה למטה!',
+        letters: ['ז'],
+      },
+      {
         type: 'wordsearch',
         id: 'zayin-search',
         title: "תפזורת ז'",
@@ -367,6 +423,13 @@ export const UNITS: Unit[] = [
         id: 'lamed-intro',
         title: "מכירים את ל'",
         instructions: 'ל׳ היא האות היחידה שמטפסת מעל השורה — קל לזהות אותה מרחוק!',
+        letters: ['ל'],
+      },
+      {
+        type: 'trace',
+        id: 'lamed-trace',
+        title: 'עקבו על האותיות',
+        instructions: 'ציירו עם האצבע או העכבר על כל אות — מתחילים בנקודה הירוקה, מלמעלה למטה!',
         letters: ['ל'],
       },
       {
@@ -420,6 +483,13 @@ export const UNITS: Unit[] = [
         letters: ['פ', 'ף'],
       },
       {
+        type: 'trace',
+        id: 'pe-trace',
+        title: 'עקבו על האותיות',
+        instructions: 'ציירו עם האצבע או העכבר על כל אות — מתחילים בנקודה הירוקה, מלמעלה למטה!',
+        letters: ['פ', 'ף'],
+      },
+      {
         type: 'flashcards',
         id: 'pe-cards',
         title: 'פענחו את המילים',
@@ -451,6 +521,13 @@ export const UNITS: Unit[] = [
         id: 'tsadi-intro',
         title: "מכירים את צ' ץ'",
         instructions: 'האותיות האחרונות במסע! צ׳ רגילה ו-ץ׳ סופית שצוללת עמוק מתחת לשורה.',
+        letters: ['צ', 'ץ'],
+      },
+      {
+        type: 'trace',
+        id: 'tsadi-trace',
+        title: 'עקבו על האותיות',
+        instructions: 'ציירו עם האצבע או העכבר על כל אות — מתחילים בנקודה הירוקה, מלמעלה למטה!',
         letters: ['צ', 'ץ'],
       },
       {

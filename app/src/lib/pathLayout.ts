@@ -8,7 +8,7 @@ export const BG_RATIO = 2413 / 1200;
 export const UNIT_COLORS = ['#0d9488', '#f59e0b', '#8b5cf6', '#e05252', '#3b82f6', '#ec4899', '#16a34a', '#a16207', '#d97706', '#0891b2', '#c026d3', '#4d7c0f', '#b45309'];
 
 /** גרסה — מתעלמים משמירות ישנות אם שינינו את ברירת המחדל בקוד */
-export const LS_PATH = 'agol_station_pos_v3';
+export const LS_PATH = 'agol_station_pos_v4';
 
 /** מיקומי 32 התחנות — הותאמו ידנית על השביל */
 export const STATION_POS: Pt[] = [
@@ -54,8 +54,36 @@ export function stationCount(): number {
   return UNITS.reduce((n, u) => n + u.activities.length, 0);
 }
 
+/**
+ * דגימה מחדש של השביל המכוון-ידנית לכל מספר תחנות:
+ * שומרים על צורת המסלול, מפזרים N נקודות במרווחים שווים לאורכו.
+ * כך אפשר להוסיף/להסיר פעילויות בלי לכוון מחדש את המפה.
+ */
+function resamplePath(pts: Pt[], n: number): Pt[] {
+  if (n <= 0) return [];
+  if (n === pts.length) return pts.map((p) => ({ ...p }));
+  const dist = [0];
+  for (let i = 1; i < pts.length; i++) {
+    dist.push(dist[i - 1] + Math.hypot(pts[i].x - pts[i - 1].x, pts[i].y - pts[i - 1].y));
+  }
+  const total = dist[dist.length - 1];
+  const out: Pt[] = [];
+  for (let k = 0; k < n; k++) {
+    const t = (k / Math.max(1, n - 1)) * total;
+    let i = 1;
+    while (i < dist.length - 1 && dist[i] < t) i++;
+    const seg = dist[i] - dist[i - 1] || 1;
+    const f = (t - dist[i - 1]) / seg;
+    out.push({
+      x: pts[i - 1].x + (pts[i].x - pts[i - 1].x) * f,
+      y: pts[i - 1].y + (pts[i].y - pts[i - 1].y) * f,
+    });
+  }
+  return out;
+}
+
 export function defaultStationPositions(): Pt[] {
-  return STATION_POS.map((p) => ({ ...p }));
+  return resamplePath(STATION_POS, stationCount());
 }
 
 export function loadStationPositions(): Pt[] {
