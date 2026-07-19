@@ -2,9 +2,10 @@ import { UNITS } from '../data/units';
 
 export interface Pt { x: number; y: number }
 
-export const BG = '/agol/bg-journey.webp';
-export const BG_TINY = '/agol/bg-journey-tiny.webp';
-export const BG_RATIO = 2413 / 1200;
+// ‎?v=2 — עקיפת מטמון: הקבצים הוחלפו בתמונת ה-BG החדשה
+export const BG = '/agol/bg-journey.webp?v=2';
+export const BG_TINY = '/agol/bg-journey-tiny.webp?v=2';
+export const BG_RATIO = 2400 / 1200;
 export const UNIT_COLORS = ['#0d9488', '#f59e0b', '#8b5cf6', '#e05252', '#3b82f6', '#ec4899', '#16a34a', '#a16207', '#d97706', '#0891b2', '#c026d3', '#4d7c0f', '#b45309'];
 
 /** גרסה — מתעלמים משמירות ישנות אם שינינו את ברירת המחדל בקוד */

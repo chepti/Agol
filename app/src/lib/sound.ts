@@ -44,11 +44,20 @@ function note(
   osc.stop(t + dur + 0.05);
 }
 
-/** תשובה נכונה — דינג עולה קטן */
+// כמה גרסאות של צליל הצלחה — נבחרת אחת אקראית כדי שלא יימאס
+const CORRECT_VARIANTS: Array<Array<[number, number, number, OscillatorType]>> = [
+  [[660, 0, 0.16, 'sine'], [880, 0.09, 0.22, 'sine']],                       // דינג עולה
+  [[523, 0, 0.12, 'triangle'], [659, 0.08, 0.12, 'triangle'], [784, 0.16, 0.2, 'triangle']], // שלשה עולה
+  [[784, 0, 0.13, 'sine'], [1046, 0.08, 0.24, 'sine']],                      // נצנוץ גבוה
+  [[587, 0, 0.14, 'triangle'], [880, 0.09, 0.2, 'sine']],                    // קווינטה
+  [[880, 0, 0.09, 'sine'], [784, 0.07, 0.09, 'sine'], [1046, 0.14, 0.22, 'sine']], // סלסול
+];
+
+/** תשובה נכונה — צליל עולה, מתחלף אקראית */
 export function playCorrect(): void {
   if (!soundEnabled()) return;
-  note(660, 0, 0.16, 'sine', 0.16);
-  note(880, 0.09, 0.22, 'sine', 0.16);
+  const v = CORRECT_VARIANTS[Math.floor(Math.random() * CORRECT_VARIANTS.length)];
+  v.forEach(([f, t, d, type]) => note(f, t, d, type, 0.16));
 }
 
 /** טעות — באזז רך ונמוך */
@@ -58,12 +67,19 @@ export function playWrong(): void {
   note(147, 0.1, 0.25, 'triangle', 0.12);
 }
 
-/** סיום פעילות — פנפרה קצרה */
+// שתי פנפרות שונות לסיום פעילות
+const WIN_VARIANTS: number[][] = [
+  [523, 659, 784, 1047],
+  [587, 740, 880, 1175],
+  [523, 784, 659, 1047],
+];
+
+/** סיום פעילות — פנפרה קצרה, מתחלפת */
 export function playWin(): void {
   if (!soundEnabled()) return;
-  const seq = [523, 659, 784, 1047];
+  const seq = WIN_VARIANTS[Math.floor(Math.random() * WIN_VARIANTS.length)];
   seq.forEach((f, i) => note(f, i * 0.11, 0.3, 'triangle', 0.17));
-  note(1319, 0.46, 0.5, 'sine', 0.12);
+  note(seq[3] * 1.26, 0.46, 0.5, 'sine', 0.12);
 }
 
 /** קליק קטן (הפיכת קלף, בחירה) */

@@ -25,7 +25,7 @@ interface Mask {
   glyphCount: number;
   bboxTop: number;
   bboxHeight: number;
-  skeleton: Pt[];   // קו מרכזי מלמעלה למטה — לנקודת ההתחלה ולהדגמה
+  strokes: Pt[][];  // המשיכות להדגמה, בסדר ובכיוון הכתיבה
 }
 
 function buildMask(letter: string): Mask {
@@ -60,9 +60,9 @@ function buildMask(letter: string): Mask {
   // מסלול מודגם: אם יש מסלול מצויר לאות — משתמשים בו (סדר וכיוון אמיתיים);
   // אחרת שלד אוטומטי — לכל שורה ה-x החציוני, מלמעלה למטה.
   const authored = getLetterStrokes(letter);
-  let skeleton: Pt[];
+  let strokes: Pt[][];
   if (authored && authored.length) {
-    skeleton = authored.flat().map(([nx, ny]) => ({ x: nx * SIZE, y: ny * SIZE }));
+    strokes = authored.map((st) => st.map(([nx, ny]) => ({ x: nx * SIZE, y: ny * SIZE })));
   } else {
     const raw: Pt[] = [];
     for (let y = top; y <= bottom; y++) {
@@ -70,13 +70,14 @@ function buildMask(letter: string): Mask {
       if (xs.length) { xs.sort((a, b) => a - b); raw.push({ x: xs[(xs.length / 2) | 0], y }); }
     }
     const N = 36;
-    skeleton = [];
+    const skeleton: Pt[] = [];
     for (let k = 0; k < N; k++) {
       const idx = Math.min(raw.length - 1, Math.round((k / (N - 1)) * (raw.length - 1)));
       skeleton.push(raw[idx] || { x: SIZE / 2, y: top });
     }
+    strokes = [skeleton];
   }
-  return { glyph, tolerant, glyphCount, bboxTop: top, bboxHeight: Math.max(1, bottom - top), skeleton };
+  return { glyph, tolerant, glyphCount, bboxTop: top, bboxHeight: Math.max(1, bottom - top), strokes };
 }
 
 export default function Trace({
@@ -123,8 +124,8 @@ export default function Trace({
     ctx.textBaseline = 'middle';
     ctx.fillStyle = '#cfe6f2';
     ctx.fillText(letter, SIZE / 2, SIZE / 2 + 8);
-    // נקודת התחלה
-    const s = mask.skeleton[0];
+    // נקודת התחלה — ראש המשיכה הראשונה
+    const s = mask.strokes[0][0];
     ctx.beginPath();
     ctx.arc(s.x, s.y, 12, 0, Math.PI * 2);
     ctx.fillStyle = '#16a34a';
@@ -140,24 +141,31 @@ export default function Trace({
     if (!mask || !demo) return;
     if (demoRaf.current) cancelAnimationFrame(demoRaf.current);
     const ctx = demo.getContext('2d')!;
-    const pts = mask.skeleton;
-    const DURATION = 1900;
+    const strokes = mask.strokes;
+    const total = strokes.reduce((n, s) => n + s.length, 0);
+    const DURATION = Math.min(3200, 900 + total * 22);
     let t0: number | null = null;
     const step = (ts: number) => {
       if (t0 === null) t0 = ts;
       const p = Math.min(1, (ts - t0) / DURATION);
       ctx.clearRect(0, 0, SIZE, SIZE);
-      // עקבה מודגמת עד המיקום הנוכחי
-      const upto = Math.max(1, Math.floor(p * pts.length));
       ctx.lineCap = 'round'; ctx.lineJoin = 'round';
       ctx.lineWidth = INK_W;
       ctx.strokeStyle = 'rgba(13,148,136,0.35)';
-      ctx.beginPath();
-      ctx.moveTo(pts[0].x, pts[0].y);
-      for (let i = 1; i < upto; i++) ctx.lineTo(pts[i].x, pts[i].y);
-      ctx.stroke();
+      // מציירים משיכה-משיכה, בלי קו מחבר ביניהן
+      let remain = Math.max(1, Math.floor(p * total));
+      let head: Pt = strokes[0][0];
+      for (const st of strokes) {
+        if (remain <= 0) break;
+        const upto = Math.min(st.length, remain);
+        ctx.beginPath();
+        ctx.moveTo(st[0].x, st[0].y);
+        for (let i = 1; i < upto; i++) ctx.lineTo(st[i].x, st[i].y);
+        ctx.stroke();
+        head = st[upto - 1];
+        remain -= st.length;
+      }
       // "עט" מודגם
-      const head = pts[Math.min(pts.length - 1, upto)];
       ctx.beginPath();
       ctx.arc(head.x, head.y, 13, 0, Math.PI * 2);
       ctx.fillStyle = '#0f766e';
@@ -243,8 +251,8 @@ export default function Trace({
     const { coverage, stray } = measure();
     setFillPct(Math.round(coverage * 100));
     const fp = firstPointRef.current;
-    // התחלה נכונה = קרוב לנקודה הירוקה (ראש המסלול)
-    const start = maskRef.current!.skeleton[0];
+    // התחלה נכונה = קרוב לנקודה הירוקה (ראש המשיכה הראשונה)
+    const start = maskRef.current!.strokes[0][0];
     const startedTop = !!fp && Math.hypot(fp.x - start.x, fp.y - start.y) <= SIZE * 0.3;
 
     if (coverage >= COVER_PASS && stray <= STRAY_MAX && startedTop) {

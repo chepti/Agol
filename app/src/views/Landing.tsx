@@ -5,7 +5,7 @@ import { SiteCredit } from '../ui/Feedback';
 
 export default function Landing() {
   return (
-    <HeroBg image="/agol/bg-landing.webp">
+    <HeroBg image="/agol/bg-landing.webp?v=2">
       <div
         style={{
           minHeight: '100vh',
