@@ -39,7 +39,7 @@ export default function PlayView({
 
   return (
     <SoftPageShell seed={activity.id}>
-      <div style={{ maxWidth: 760, margin: '0 auto', padding: '20px 16px 60px' }}>
+      <div style={{ maxWidth: activity.type === 'bubbles' ? 960 : 760, margin: '0 auto', padding: '20px 16px 60px' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10, marginBottom: 4, flexWrap: 'wrap' }}>
           <button
             className="btn small"

@@ -101,7 +101,7 @@ export const UNITS: Unit[] = [
         type: 'bubbles',
         id: 'nun-bubbles',
         title: 'בועות מילים',
-        instructions: 'לחצו על בועה בכתב יד ואז על הבועה בדפוס שמתאימה לה — והן מתפוצצות!',
+        instructions: 'גררו בועה בכתב יד אל הבועה בדפוס שמתאימה לה — כשהן נפגשות הן מתפוצצות!',
         pairs: [
           { agol: 'נר' },
           { agol: 'הר' },
@@ -169,7 +169,7 @@ export const UNITS: Unit[] = [
         type: 'bubbles',
         id: 'chet-bubbles',
         title: 'בועות ח׳ ו-ת׳',
-        instructions: 'התאימו בועות כתב יד לדפוס — שימו לב במיוחד להבדל בין ח׳ ל-ת׳!',
+        instructions: 'גררו בועות כתב יד אל הדפוס — שימו לב במיוחד להבדל בין ח׳ ל-ת׳!',
         pairs: [
           { agol: 'חוק' },
           { agol: 'תיק' },
