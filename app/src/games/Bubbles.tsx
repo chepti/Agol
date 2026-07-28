@@ -17,7 +17,7 @@ interface Bubble {
 
 interface Pos { x: number; y: number }
 
-const HUES = [190, 320, 45, 145, 265, 15, 200, 330];
+const HUES = [195, 330, 48, 155, 270, 18, 210, 300]; // פסטל רך
 const NEAR = 1.08;
 
 function shuffle<T>(arr: T[]): T[] {
@@ -342,22 +342,24 @@ export default function Bubbles({
                 marginTop: -b.size / 2,
                 borderRadius: '50%',
                 border: isDrag || isNearOk
-                  ? '3px solid #0f766e'
+                  ? '2.5px solid rgba(15,118,110,0.55)'
                   : isNear
-                    ? '3px solid #dc2626'
-                    : '2.5px solid rgba(255,255,255,0.85)',
-                background: `radial-gradient(circle at 30% 28%, rgba(255,255,255,0.95), hsl(${b.hue} 85% 72%) 45%, hsl(${b.hue} 70% 55%))`,
-                color: '#134e4a',
+                    ? '2.5px solid rgba(220,38,38,0.45)'
+                    : '2px solid rgba(255,255,255,0.65)',
+                background: `radial-gradient(circle at 32% 28%, rgba(255,255,255,0.88), hsla(${b.hue}, 70%, 82%, 0.55) 42%, hsla(${b.hue}, 55%, 72%, 0.42))`,
+                backdropFilter: 'blur(2px)',
+                WebkitBackdropFilter: 'blur(2px)',
+                color: 'rgba(30, 58, 70, 0.92)',
                 fontSize: b.agol ? (b.text.length > 3 ? 24 : 32) : b.text.length > 3 ? 17 : 22,
                 fontWeight: b.agol ? 400 : 800,
                 cursor: isDrag ? 'grabbing' : 'grab',
                 userSelect: 'none',
                 touchAction: 'none',
                 boxShadow: isDrag
-                  ? '0 12px 28px rgba(0,0,0,0.22), 0 0 0 5px rgba(15,118,110,0.2)'
+                  ? '0 10px 24px rgba(0,0,0,0.14), 0 0 0 4px rgba(15,118,110,0.15)'
                   : isNearOk
-                    ? '0 0 0 5px rgba(34,197,94,0.35), 0 8px 18px rgba(0,0,0,0.12)'
-                    : '0 6px 16px rgba(0,0,0,0.12), inset 0 -6px 12px rgba(0,0,0,0.08)',
+                    ? '0 0 0 4px rgba(34,197,94,0.28), 0 6px 14px rgba(0,0,0,0.08)'
+                    : '0 4px 14px rgba(0,0,0,0.08), inset 0 -4px 10px rgba(255,255,255,0.35)',
                 transform: isDrag ? 'scale(1.14)' : isNearOk ? 'scale(1.08)' : undefined,
                 zIndex: isDrag ? 20 : isNear ? 8 : 1,
                 animationDuration: `${b.dur}s`,

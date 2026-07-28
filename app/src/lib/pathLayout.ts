@@ -10,7 +10,7 @@ export const BG_RATIO = 2927 / 1400;
 export const UNIT_COLORS = ['#0d9488', '#f59e0b', '#8b5cf6', '#e05252', '#3b82f6', '#ec4899', '#16a34a', '#a16207', '#d97706', '#0891b2', '#c026d3', '#4d7c0f', '#b45309'];
 
 /** גרסה — מתעלמים משמירות ישנות אחרי הוספת פעילויות */
-export const LS_PATH = 'agol_station_pos_v8';
+export const LS_PATH = 'agol_station_pos_v9';
 
 /** מיקומי 43 התחנות — הותאמו ידנית על השביל החדש */
 export const STATION_POS: Pt[] = [
