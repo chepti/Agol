@@ -7,6 +7,7 @@ import Flashcards from './Flashcards';
 import WordSearch from './WordSearch';
 import Match from './Match';
 import Memory from './Memory';
+import Bubbles from './Bubbles';
 import Story from './Story';
 import Order from './Order';
 import Paint from './Paint';
@@ -64,6 +65,7 @@ export default function GameHost({
       case 'wordsearch': return <WordSearch activity={activity} onFinish={finish} />;
       case 'match': return <Match activity={activity} onFinish={finish} />;
       case 'memory': return <Memory activity={activity} onFinish={finish} />;
+      case 'bubbles': return <Bubbles activity={activity} onFinish={finish} />;
       case 'story': return <Story activity={activity} onFinish={finish} />;
       case 'order': return <Order activity={activity} onFinish={finish} />;
       case 'paint': return <Paint activity={activity} onFinish={finish} />;

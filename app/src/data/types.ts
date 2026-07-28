@@ -43,7 +43,16 @@ export interface MatchActivity {
   id: string;
   title: string;
   instructions: string;
-  pairs: { agol: string; label?: string }[]; // גוררים כתב רגיל אל כתב רש"י
+  pairs: { agol: string; label?: string }[]; // גוררים כתב רגיל אל כתב יד
+}
+
+/** בועות צפות: לחיצה על זוג (כתב יד + דפוס) — והן מתפוצצות */
+export interface BubblesActivity {
+  type: 'bubbles';
+  id: string;
+  title: string;
+  instructions: string;
+  pairs: { agol: string; label?: string }[];
 }
 
 export interface MemoryActivity {
@@ -51,7 +60,7 @@ export interface MemoryActivity {
   id: string;
   title: string;
   instructions: string;
-  pairs: { a: string; b: string }[]; // a מוצג ברש"י, b בכתב רגיל
+  pairs: { a: string; b: string }[]; // a מוצג בכתב יד, b בדפוס
 }
 
 export interface StoryActivity {
@@ -110,6 +119,7 @@ export type Activity =
   | FlashcardsActivity
   | WordSearchActivity
   | MatchActivity
+  | BubblesActivity
   | MemoryActivity
   | StoryActivity
   | OrderActivity

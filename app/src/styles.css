@@ -234,3 +234,32 @@ h1, h2, h3 { margin: 0; }
   0%, 100% { box-shadow: 0 0 0 6px rgba(15, 118, 110, 0.28), 0 3px 8px rgba(90, 62, 20, 0.4); }
   50% { box-shadow: 0 0 0 13px rgba(15, 118, 110, 0.1), 0 3px 8px rgba(90, 62, 20, 0.4); }
 }
+
+/* בועות צפות */
+@keyframes bubble-drift {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  25% { transform: translateY(calc(var(--bubble-shift, 5px) * -1)) translateX(3px); }
+  50% { transform: translateY(calc(var(--bubble-shift, 5px) * -0.4)) translateX(-4px); }
+  75% { transform: translateY(calc(var(--bubble-shift, 5px) * -1.2)) translateX(2px); }
+}
+.bubble-float {
+  animation-name: bubble-drift;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+@keyframes bubble-burst {
+  0% { transform: scale(1); opacity: 1; }
+  40% { transform: scale(1.35); opacity: 0.9; }
+  100% { transform: scale(0); opacity: 0; }
+}
+.bubble-pop {
+  animation: bubble-burst 0.48s ease-in forwards !important;
+  pointer-events: none;
+}
+@keyframes memory-pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.12); }
+  100% { transform: scale(0.92); }
+}
+.memory-pop { animation: memory-pop 0.4s ease both; }
+

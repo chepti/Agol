@@ -31,6 +31,18 @@ export const UNITS: Unit[] = [
         letters: ['י', 'ו', 'ן'],
       },
       {
+        type: 'memory',
+        id: 'kavim-memory',
+        title: 'זיכרון של קווים',
+        instructions: 'הפכו קלפים ומצאו זוגות: אות בכתב יד ואותה אות בדפוס. קל וכיפי!',
+        pairs: [
+          { a: 'י', b: 'י' },
+          { a: 'ו', b: 'ו' },
+          { a: 'ן', b: 'ן' },
+          { a: 'יו', b: 'יו' },
+        ],
+      },
+      {
         type: 'quiz',
         id: 'kavim-quiz',
         title: 'קצר או ארוך?',
@@ -86,6 +98,19 @@ export const UNITS: Unit[] = [
         ],
       },
       {
+        type: 'bubbles',
+        id: 'nun-bubbles',
+        title: 'בועות מילים',
+        instructions: 'לחצו על בועה בכתב יד ואז על הבועה בדפוס שמתאימה לה — והן מתפוצצות!',
+        pairs: [
+          { agol: 'נר' },
+          { agol: 'הר' },
+          { agol: 'רון' },
+          { agol: 'נהר' },
+          { agol: 'יונה' },
+        ],
+      },
+      {
         type: 'quiz',
         id: 'nun-quiz',
         title: 'מה כתוב כאן?',
@@ -138,6 +163,19 @@ export const UNITS: Unit[] = [
           { text: 'קרן' },
           { text: 'נחת' },
           { text: 'חנות' },
+        ],
+      },
+      {
+        type: 'bubbles',
+        id: 'chet-bubbles',
+        title: 'בועות ח׳ ו-ת׳',
+        instructions: 'התאימו בועות כתב יד לדפוס — שימו לב במיוחד להבדל בין ח׳ ל-ת׳!',
+        pairs: [
+          { agol: 'חוק' },
+          { agol: 'תיק' },
+          { agol: 'רוח' },
+          { agol: 'קיר' },
+          { agol: 'תות' },
         ],
       },
       {

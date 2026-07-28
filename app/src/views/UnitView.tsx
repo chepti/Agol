@@ -12,6 +12,7 @@ const TYPE_COLORS: Record<string, string> = {
   flashcards: '#f59e0b',
   wordsearch: '#3b82f6',
   match: '#8b5cf6',
+  bubbles: '#06b6d4',
   memory: '#ec4899',
   story: '#a16207',
   order: '#16a34a',
