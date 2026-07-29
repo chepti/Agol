@@ -80,7 +80,7 @@ export default function TraceEdit() {
       ctx.fill();
       ctx.fillStyle = '#fff';
       ctx.textBaseline = 'middle';
-      ctx.font = '700 15px Heebo';
+      ctx.font = '700 15px "Varela Round"';
       ctx.fillText(String(si + 1), s0[0] * SIZE, s0[1] * SIZE + 1);
       ctx.font = `700 ${FONT_PX}px Agol`;
       ctx.textBaseline = 'alphabetic';
