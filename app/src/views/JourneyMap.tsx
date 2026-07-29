@@ -9,6 +9,7 @@ import JourneyTrail from './JourneyTrail';
 import { SoftPageShell } from '../ui/PageShell';
 import { FeedbackButton } from '../ui/Feedback';
 import { nav } from '../App';
+import { useNikud } from '../lib/NikudContext';
 
 type MapView = 'trail' | 'list';
 const LS_VIEW = 'agol_map_view';
@@ -27,6 +28,7 @@ export default function JourneyMap({
   const pct = overallPercent(progress);
   const finished = allCompleted(progress);
   const celebrated = useRef(false);
+  const { enabled: nikudOn, setEnabled: setNikudOn, text } = useNikud();
   const [view, setView] = useState<MapView>(() =>
     localStorage.getItem(LS_VIEW) === 'list' ? 'list' : 'trail'
   );
@@ -134,36 +136,70 @@ export default function JourneyMap({
             : fab(<Users size={21} />, 'החלפת משתמש — במחשב משותף כל תלמיד נכנס עם השם והאימוג\'י שלו', () => onLogout())}
         </div>
 
-        {/* מסלול חופשי לאורח — צף בתחתית המסך */}
-        {session.token === 'guest' && (
-          <label
+        {/* מסלול חופשי + ניקוד — לאורח / תצוגת מורה */}
+        {(session.token === 'guest' || isTeacherPreview) && (
+          <div
             style={{
               position: 'fixed',
               bottom: 14,
               left: 12,
               zIndex: 10,
               display: 'flex',
-              alignItems: 'center',
-              gap: 7,
-              fontSize: 13.5,
-              fontWeight: 700,
-              color: '#4a3416',
-              background: 'rgba(255, 254, 247, 0.94)',
-              border: '3px solid rgba(125, 82, 38, 0.85)',
-              borderRadius: 999,
-              padding: '7px 14px',
-              cursor: 'pointer',
-              boxShadow: '0 4px 10px rgba(30, 70, 20, 0.35)',
+              flexDirection: 'column',
+              gap: 8,
             }}
           >
-            <input
-              type="checkbox"
-              checked={!!session.freeNav}
-              onChange={(e) => onSessionChange(setGuestFreeNav(session, e.target.checked))}
-            />
-            <Unlock size={16} />
-            מסלול חופשי
-          </label>
+            {session.token === 'guest' && (
+              <label
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 7,
+                  fontSize: 13.5,
+                  fontWeight: 700,
+                  color: '#4a3416',
+                  background: 'rgba(255, 254, 247, 0.94)',
+                  border: '3px solid rgba(125, 82, 38, 0.85)',
+                  borderRadius: 999,
+                  padding: '7px 14px',
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 10px rgba(30, 70, 20, 0.35)',
+                }}
+              >
+                <input
+                  type="checkbox"
+                  checked={!!session.freeNav}
+                  onChange={(e) => onSessionChange(setGuestFreeNav(session, e.target.checked))}
+                />
+                <Unlock size={16} />
+                מסלול חופשי
+              </label>
+            )}
+            <label
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 7,
+                fontSize: 13.5,
+                fontWeight: 700,
+                color: '#4a3416',
+                background: 'rgba(255, 254, 247, 0.94)',
+                border: '3px solid rgba(125, 82, 38, 0.85)',
+                borderRadius: 999,
+                padding: '7px 14px',
+                cursor: 'pointer',
+                boxShadow: '0 4px 10px rgba(30, 70, 20, 0.35)',
+              }}
+              title="כשכבוי — כל הטקסט בלי ניקוד"
+            >
+              <input
+                type="checkbox"
+                checked={nikudOn}
+                onChange={(e) => setNikudOn(e.target.checked)}
+              />
+              {text('הצגת ניקוד')}
+            </label>
+          </div>
         )}
 
         {/* משוב — רק למורה / תרגול חופשי */}
@@ -231,6 +267,16 @@ export default function JourneyMap({
                 onChange={(e) => onSessionChange(setGuestFreeNav(session, e.target.checked))}
               />
               מסלול חופשי
+            </label>
+          )}
+          {(isTeacherPreview || session.token === 'guest') && (
+            <label style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 13.5, color: 'var(--ink-soft)', cursor: 'pointer' }} title="כשכבוי — כל הטקסט בלי ניקוד">
+              <input
+                type="checkbox"
+                checked={nikudOn}
+                onChange={(e) => setNikudOn(e.target.checked)}
+              />
+              {text('הצגת ניקוד')}
             </label>
           )}
           {(isTeacherPreview || session.token === 'guest') && <FeedbackButton compact />}

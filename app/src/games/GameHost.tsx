@@ -14,6 +14,7 @@ import Paint from './Paint';
 import Trace from './Trace';
 import { Stars, starsFor } from './ui';
 import { playWin } from '../lib/sound';
+import { useNikud } from '../lib/NikudContext';
 
 export default function GameHost({
   activity,
@@ -22,6 +23,7 @@ export default function GameHost({
   activity: Activity;
   onDone: (r: ActivityResult) => void;
 }) {
+  const { text } = useNikud();
   const [result, setResult] = useState<ActivityResult | null>(null);
 
   const finish = (r: ActivityResult) => {
@@ -76,9 +78,9 @@ export default function GameHost({
   return (
     <div className="float-up">
       <div style={{ textAlign: 'center', marginBottom: 18 }}>
-        <h2 style={{ fontSize: 24 }}>{activity.title}</h2>
+        <h2 style={{ fontSize: 24 }}>{text(activity.title)}</h2>
         <p style={{ color: 'var(--ink-soft)', fontSize: 16, maxWidth: 560, margin: '8px auto 0', lineHeight: 1.6 }}>
-          {activity.instructions}
+          {text(activity.instructions)}
         </p>
       </div>
       {game()}
