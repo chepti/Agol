@@ -11,7 +11,7 @@ export function isSingleLetter(text: string): boolean {
 
 /**
  * מילון ניקוד למילים במסע.
- * התלמיד מקליד בלי ניקוד; הניקוד מוצג בכתב דפוס (Varela) בלבד.
+ * התלמיד מקליד בלי ניקוד; הניקוד מוצג בכתב דפוס (Rubik) בלבד.
  */
 const NIKUD: Record<string, string> = {
   // יחידה 1–2
@@ -245,7 +245,7 @@ const NIKUD: Record<string, string> = {
 };
 
 /**
- * ניקוד להצגה בכתב דפוס בלבד (Varela Round).
+ * ניקוד להצגה בכתב דפוס בלבד (Rubik).
  * כתב יד (Ktiva / .agol-font) — בלי ניקוד: הכתב העגול חשוב יותר מהניקוד.
  */
 export function withNikud(text: string): string {

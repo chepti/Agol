@@ -349,7 +349,7 @@ export default function Bubbles({
                 WebkitBackdropFilter: 'blur(2px)',
                 color: 'rgba(30, 58, 70, 0.92)',
                 fontSize: b.agol ? (b.text.length > 3 ? 24 : 32) : b.text.length > 3 ? 17 : 22,
-                fontWeight: b.agol ? 400 : 800,
+                fontWeight: b.agol ? 700 : 800,
                 cursor: isDrag ? 'grabbing' : 'grab',
                 userSelect: 'none',
                 touchAction: 'none',

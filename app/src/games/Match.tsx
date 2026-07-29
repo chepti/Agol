@@ -107,7 +107,7 @@ export default function Match({
             >
               <span>{forHandwriting(p.agol)}</span>
               {isDone && (
-                <span style={{ fontFamily: 'Varela Round', fontSize: 18, fontWeight: 700, color: 'var(--green)' }}>
+                <span style={{ fontFamily: 'Rubik', fontSize: 18, fontWeight: 700, color: 'var(--green)' }}>
                   = {p.label ?? withNikud(p.agol)} ✓
                 </span>
               )}

@@ -1,24 +1,26 @@
 @font-face {
-  font-family: 'Varela Round';
-  src: url('/agol/fonts/varela-round-he.woff2') format('woff2');
-  font-weight: 400;
+  font-family: 'Rubik';
+  src: url('/agol/fonts/rubik-he.woff2?v=1') format('woff2');
+  font-weight: 300 900;
   font-style: normal;
   font-display: swap;
   unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
 }
 @font-face {
-  font-family: 'Varela Round';
-  src: url('/agol/fonts/varela-round-lat.woff2') format('woff2');
-  font-weight: 400;
+  font-family: 'Rubik';
+  src: url('/agol/fonts/rubik-lat.woff2?v=1') format('woff2');
+  font-weight: 300 900;
   font-style: normal;
   font-display: swap;
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
+/* Ktiva Tama — כתב עגול (הומר מ-PUA ליוניקוד לווב) */
 @font-face {
   font-family: 'Agol';
-  src: url('/agol/fonts/agol.woff2?v=3') format('woff2'),
-       url('/agol/fonts/agol.ttf?v=3') format('truetype');
-  font-weight: 400 700;
+  src: url('/agol/fonts/agol.woff2?v=4') format('woff2'),
+       url('/agol/fonts/agol.ttf?v=4') format('truetype');
+  font-weight: 700;
+  font-style: normal;
   font-display: swap;
 }
 
@@ -50,7 +52,7 @@ html, body {
 }
 
 body {
-  font-family: 'Varela Round', system-ui, sans-serif;
+  font-family: 'Rubik', system-ui, sans-serif;
   background: var(--paper);
   color: var(--ink);
   direction: rtl;
@@ -59,7 +61,8 @@ body {
 }
 
 .agol-font {
-  font-family: 'Agol', 'Ktiva Tama MF Bold A', cursive;
+  font-family: 'Agol', cursive;
+  font-weight: 700;
   font-feature-settings: 'liga' 0;
 }
 
