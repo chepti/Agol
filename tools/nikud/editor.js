@@ -179,11 +179,11 @@
     const anchor = ensureAnchor();
     ctx.clearRect(0, 0, SIZE, SIZE);
 
-    // קווי עזר
-    ctx.strokeStyle = "#b7d7e8";
+    // קווי עזר — קו בסיס מודגש
     ctx.lineWidth = 1;
     ctx.setLineDash([6, 6]);
-    for (const y of [0, L.box.y1, L.box.y2]) {
+    ctx.strokeStyle = "#b7d7e8";
+    for (const y of [L.box.y1, L.box.y2]) {
       const p = fontToCanvas(0, y, L);
       ctx.beginPath();
       ctx.moveTo(40, p.y);
@@ -191,11 +191,20 @@
       ctx.stroke();
     }
     ctx.setLineDash([]);
+    ctx.strokeStyle = "#5a9fb8";
+    ctx.lineWidth = 2.5;
+    {
+      const p = fontToCanvas(0, 0, L);
+      ctx.beginPath();
+      ctx.moveTo(40, p.y);
+      ctx.lineTo(SIZE - 40, p.y);
+      ctx.stroke();
+    }
 
-    // האות
+    // האות — getPath של opentype כבר הופך Y לקנבס; לא להפוך שוב
     ctx.save();
     ctx.translate(L.ox, L.oy);
-    ctx.scale(L.scale, -L.scale);
+    ctx.scale(L.scale, L.scale);
     const pxPath = L.glyph.getPath(0, 0, L.upm);
     pxPath.fill = "#0f766e";
     pxPath.draw(ctx);
@@ -213,8 +222,9 @@
 
       ctx.save();
       ctx.translate(L.ox, L.oy);
-      ctx.scale(L.scale, -L.scale);
-      ctx.translate(markOriginX, markOriginY);
+      ctx.scale(L.scale, L.scale);
+      // getPath כבר ב־Y של קנבס; הזזה ביחידות פונט עם התאמת Y
+      ctx.translate(markOriginX, -markOriginY);
       const mp = mg.getPath(0, 0, L.upm);
       mp.fill = "#d97706";
       mp.draw(ctx);
