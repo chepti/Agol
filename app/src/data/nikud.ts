@@ -245,8 +245,7 @@ const NIKUD: Record<string, string> = {
 };
 
 /**
- * ניקוד להצגה בכתב דפוס בלבד (Rubik).
- * כתב יד (Ktiva / .agol-font) — בלי ניקוד: הכתב העגול חשוב יותר מהניקוד.
+ * ניקוד להצגה — גם בדפוס (Rubik) וגם בכתב יד (Ktiva עם GPOS מעורך העוגנים).
  */
 export function withNikud(text: string): string {
   const bare = stripNikud(text).trim();
@@ -257,7 +256,7 @@ export function withNikud(text: string): string {
   return bare.replace(/[א-ת]+/g, (w) => NIKUD[w] ?? w);
 }
 
-/** טקסט לכתב יד — תמיד בלי ניקוד */
+/** תצוגת כתב יד — עם ניקוד (הגופן תומך אחרי עריכת עוגנים) */
 export function forHandwriting(text: string): string {
-  return stripNikud(text).trim();
+  return withNikud(text);
 }
