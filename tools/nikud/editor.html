@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>עורך ניקוד — Ktiva / Agol (מקומי)</title>
+  <link rel="stylesheet" href="editor.css" />
+  <script src="https://cdn.jsdelivr.net/npm/opentype.js@1.3.4/dist/opentype.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>עורך מיקומי ניקוד</h1>
+    <p>
+      לכל אות מגדירים 3 עוגנים: <b>מתחת</b>, <b>דגש</b>, <b>מעל</b>.
+      גוררים את הסימן למקום הנכון, שומרים, ואז מריצים
+      <code>py build_gpos.py</code>.
+    </p>
+  </header>
+
+  <main>
+    <section class="letters" id="letters"></section>
+
+    <section class="workspace">
+      <div class="toolbar">
+        <div class="classes" id="classes"></div>
+        <label class="sample">
+          דוגמת ניקוד:
+          <select id="sampleMark"></select>
+        </label>
+        <div class="actions">
+          <button type="button" id="btnReset">איפוס לאות</button>
+          <button type="button" id="btnPrev">→ הקודם</button>
+          <button type="button" id="btnNext">הבא ←</button>
+          <button type="button" class="primary" id="btnSave">שמירה (הורדת anchors.json)</button>
+        </div>
+      </div>
+
+      <canvas id="cv" width="520" height="520"></canvas>
+      <p class="hint" id="hint">גררו את העיגול הירוק — זה מיקום העוגן על האות</p>
+      <p class="status" id="status"></p>
+
+      <div class="preview-row">
+        <span>תצוגה חיה:</span>
+        <span id="livePreview" class="live"></span>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <ol>
+      <li><code>py prepare_marks.py</code> — פעם אחת (כבר רץ אם יש work/agol-work.ttf)</li>
+      <li>פתחו את העורך: <code>npx --yes serve .</code> מתוך תיקייה זו, ואז http://localhost:3000</li>
+      <li>ערכו עוגנים → שמירה → שימו את הקובץ כ־<code>anchors.json</code> כאן</li>
+      <li><code>py build_gpos.py</code> — כותב ל־app/public/fonts</li>
+    </ol>
+  </footer>
+
+  <script src="editor.js"></script>
+</body>
+</html>
