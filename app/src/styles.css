@@ -17,8 +17,8 @@
 /* Ktiva Tama — כתב עגול (הומר מ-PUA ליוניקוד לווב) */
 @font-face {
   font-family: 'Agol';
-  src: url('/agol/fonts/agol.woff2?v=4') format('woff2'),
-       url('/agol/fonts/agol.ttf?v=4') format('truetype');
+  src: url('/agol/fonts/agol.woff2?v=5') format('woff2'),
+       url('/agol/fonts/agol.ttf?v=5') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -64,6 +64,14 @@ body {
   font-family: 'Agol', cursive;
   font-weight: 700;
   font-feature-settings: 'liga' 0;
+}
+
+/* כפתורים יורשים font-family מה-body — חובה לדרוס לכתב העגול */
+button.agol-font,
+.agol-font button,
+button .agol-font {
+  font-family: 'Agol', cursive !important;
+  font-weight: 700;
 }
 
 button {

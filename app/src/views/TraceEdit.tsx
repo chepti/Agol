@@ -117,6 +117,10 @@ export default function TraceEdit() {
     saveLetterStrokes(letter, strokes);
     setMsg('נשמר! המסלול כבר פעיל בפעילות הציור.');
     force((n) => n + 1);
+    const idx = LETTERS.findIndex((l) => l.ch === letter);
+    if (idx >= 0 && idx + 1 < LETTERS.length) {
+      setTimeout(() => setLetter(LETTERS[idx + 1].ch), 350);
+    }
   };
 
   const copyCode = async () => {
