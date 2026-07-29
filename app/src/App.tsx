@@ -94,7 +94,13 @@ export default function App() {
         session={session}
         progress={progress}
         onLogout={logout}
-        onSessionChange={(s) => { setSession(s); }}
+        onSessionChange={(s) => {
+          setSession(s);
+          // רענון מיידי של freeNav במפה (בלי לחכות ל־useEffect)
+          if (s.token === 'guest' || s.token === 'teacher-preview') {
+            fetchProgress(s).then(setProgress).catch(() => {});
+          }
+        }}
       />
     );
   } else if (route === 'unit' && parts[1]) {

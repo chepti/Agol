@@ -112,14 +112,14 @@ function loadGuestProgress(s: StudentSession): ProgressData {
   try {
     const raw = localStorage.getItem(guestKey(s));
     const p = raw ? JSON.parse(raw) : { letters: {}, completed: {} };
-    // תצוגת מורה תמיד בלי נעילה
-    p.freeNav = s.token === 'teacher-preview' ? true : !!s.freeNav;
+    // מסלול חופשי — לפי בחירת אורח/מורה בסשן
+    p.freeNav = !!s.freeNav;
     return p;
   } catch {
     return {
       letters: {},
       completed: {},
-      freeNav: s.token === 'teacher-preview' ? true : !!s.freeNav,
+      freeNav: !!s.freeNav,
     };
   }
 }

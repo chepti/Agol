@@ -149,32 +149,30 @@ export default function JourneyMap({
               gap: 8,
             }}
           >
-            {session.token === 'guest' && (
-              <label
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 7,
-                  fontSize: 13.5,
-                  fontWeight: 700,
-                  color: '#4a3416',
-                  background: 'rgba(255, 254, 247, 0.94)',
-                  border: '3px solid rgba(125, 82, 38, 0.85)',
-                  borderRadius: 999,
-                  padding: '7px 14px',
-                  cursor: 'pointer',
-                  boxShadow: '0 4px 10px rgba(30, 70, 20, 0.35)',
-                }}
-              >
-                <input
-                  type="checkbox"
-                  checked={!!session.freeNav}
-                  onChange={(e) => onSessionChange(setGuestFreeNav(session, e.target.checked))}
-                />
-                <Unlock size={16} />
-                מסלול חופשי
-              </label>
-            )}
+            <label
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 7,
+                fontSize: 13.5,
+                fontWeight: 700,
+                color: '#4a3416',
+                background: 'rgba(255, 254, 247, 0.94)',
+                border: '3px solid rgba(125, 82, 38, 0.85)',
+                borderRadius: 999,
+                padding: '7px 14px',
+                cursor: 'pointer',
+                boxShadow: '0 4px 10px rgba(30, 70, 20, 0.35)',
+              }}
+            >
+              <input
+                type="checkbox"
+                checked={!!session.freeNav}
+                onChange={(e) => onSessionChange(setGuestFreeNav(session, e.target.checked))}
+              />
+              <Unlock size={16} />
+              מסלול חופשי
+            </label>
             <label
               style={{
                 display: 'flex',
@@ -259,7 +257,7 @@ export default function JourneyMap({
               ← חזרה ללוח המורה
             </button>
           )}
-          {session.token === 'guest' && (
+          {(isTeacherPreview || session.token === 'guest') && (
             <label style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 13.5, color: 'var(--ink-soft)', cursor: 'pointer' }}>
               <input
                 type="checkbox"
