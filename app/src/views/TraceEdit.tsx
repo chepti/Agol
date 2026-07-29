@@ -40,9 +40,9 @@ export default function TraceEdit() {
     // קווי מחברת
     const lines = [
       { y: 0.20, dash: true, w: 1.5, c: '#b7d7e8' },
-      { y: 0.32, dash: false, w: 2, c: '#8ec5dc' },
+      { y: 0.365, dash: false, w: 2, c: '#8ec5dc' },
       { y: 0.58, dash: false, w: 2.5, c: '#5a9fb8' },
-      { y: 0.78, dash: true, w: 1.5, c: '#b7d7e8' },
+      { y: 0.74, dash: true, w: 1.5, c: '#b7d7e8' },
     ];
     lines.forEach((ln) => {
       ctx.beginPath();
