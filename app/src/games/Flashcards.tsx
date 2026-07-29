@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import type { FlashcardsActivity, ActivityResult, LetterEvents } from '../data/types';
 import { addLetterEvent } from '../lib/mastery';
 import { hebrewLetters, uniqueLetters } from '../data/letters';
-import { stripNikud } from '../data/nikud';
+import { stripNikud, withNikud } from '../data/nikud';
 import { ProgressDots, AgolCard } from './ui';
 import { playCorrect, playWrong } from '../lib/sound';
 
@@ -107,7 +107,7 @@ export default function Flashcards({
         )}
         {state === 'wrong' && (
           <p className="float-up" style={{ color: 'var(--red)', fontWeight: 700, fontSize: 18 }}>
-            כמעט... התשובה: <span style={{ fontSize: 22 }}>{card.text}</span>
+            כמעט... התשובה: <span style={{ fontSize: 22 }}>{withNikud(card.text)}</span>
           </p>
         )}
         <div style={{ marginTop: 14, display: 'flex', gap: 10, justifyContent: 'center' }}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { withNikud } from '../data/nikud';
+import { forHandwriting } from '../data/nikud';
 
 export function ProgressDots({ total, done }: { total: number; done: number }) {
   return (
@@ -59,7 +59,7 @@ export function AgolCard({ text, size = 72 }: { text: string; size?: number }) {
         direction: 'rtl',
       }}
     >
-      {withNikud(text)}
+      {forHandwriting(text)}
     </div>
   );
 }

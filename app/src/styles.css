@@ -6,8 +6,8 @@
 }
 @font-face {
   font-family: 'Agol';
-  src: url('/agol/fonts/agol.woff2') format('woff2'),
-       url('/agol/fonts/agol.ttf') format('truetype');
+  src: url('/agol/fonts/agol.woff2?v=2') format('woff2'),
+       url('/agol/fonts/agol.ttf?v=2') format('truetype');
   font-weight: 400 700;
   font-display: swap;
 }
@@ -49,7 +49,8 @@ body {
 }
 
 .agol-font {
-  font-family: 'Agol', serif;
+  font-family: 'Agol', 'Ktiva Tama MF Bold A', cursive;
+  font-feature-settings: 'liga' 0;
 }
 
 button {

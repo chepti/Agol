@@ -2,7 +2,7 @@ import React, { useMemo, useRef, useState } from 'react';
 import type { MemoryActivity, ActivityResult, LetterEvents } from '../data/types';
 import { addLetterEvent } from '../lib/mastery';
 import { uniqueLetters } from '../data/letters';
-import { withNikud } from '../data/nikud';
+import { withNikud, forHandwriting } from '../data/nikud';
 import { playCorrect, playTap, playWrong } from '../lib/sound';
 
 // משחק זיכרון: קלף אחד בכתב יד, בן הזוג שלו בדפוס.
@@ -141,7 +141,7 @@ export default function Memory({
                 transition: 'transform 0.25s, opacity 0.35s, background 0.2s',
               }}
             >
-              {isOpen ? withNikud(card.text) : BACKS[idx % BACKS.length]}
+              {isOpen ? (card.agol ? forHandwriting(card.text) : withNikud(card.text)) : BACKS[idx % BACKS.length]}
             </button>
           );
         })}

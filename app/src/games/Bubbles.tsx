@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import type { BubblesActivity, ActivityResult, LetterEvents } from '../data/types';
 import { addLetterEvent } from '../lib/mastery';
 import { uniqueLetters } from '../data/letters';
-import { withNikud } from '../data/nikud';
+import { withNikud, forHandwriting } from '../data/nikud';
 import { playCorrect, playTap, playWrong } from '../lib/sound';
 
 interface Bubble {
@@ -292,9 +292,6 @@ export default function Bubbles({
 
   return (
     <div style={{ textAlign: 'center', width: '100%' }}>
-      <p style={{ color: 'var(--ink-soft)', fontSize: 15, marginBottom: 10 }}>
-        גררו בועה אל הבועה התואמת (כתב יד ↔ דפוס) — כשהן נפגשות, בום! 💥
-      </p>
       <div
         ref={pondRef}
         className="bubbles-pond"
@@ -369,7 +366,7 @@ export default function Bubbles({
                 transition: isDrag ? 'none' : 'box-shadow 0.15s, border-color 0.15s, transform 0.15s',
               }}
             >
-              {withNikud(b.text)}
+              {b.agol ? forHandwriting(b.text) : withNikud(b.text)}
             </button>
           );
         })}

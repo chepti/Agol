@@ -11,7 +11,7 @@ export function isSingleLetter(text: string): boolean {
 
 /**
  * מילון ניקוד למילים במסע.
- * התלמיד מקליד בלי ניקוד; הניקוד מוצג רק בכתב היד / בהצגה.
+ * התלמיד מקליד בלי ניקוד; הניקוד מוצג בכתב דפוס (Heebo) בלבד.
  */
 const NIKUD: Record<string, string> = {
   // יחידה 1–2
@@ -244,13 +244,20 @@ const NIKUD: Record<string, string> = {
   חברים: 'חֲבֵרִים',
 };
 
-/** מוסיף ניקוד להצגה — לא לאות בודדת ולא אם אין במילון */
+/**
+ * ניקוד להצגה בכתב דפוס בלבד (Heebo).
+ * כתב יד (Ktiva / .agol-font) — בלי ניקוד: הגופן לא תומך היטב בסימני ניקוד.
+ */
 export function withNikud(text: string): string {
   const bare = stripNikud(text).trim();
   if (!bare || isSingleLetter(bare)) return bare;
 
   if (NIKUD[bare]) return NIKUD[bare];
 
-  // משפטים: מילים מופרדות ברווח / פיסוק
   return bare.replace(/[א-ת]+/g, (w) => NIKUD[w] ?? w);
+}
+
+/** טקסט לכתב יד — תמיד בלי ניקוד */
+export function forHandwriting(text: string): string {
+  return stripNikud(text).trim();
 }

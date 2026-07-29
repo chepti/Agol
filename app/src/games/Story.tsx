@@ -4,7 +4,7 @@ import { addLetterEvent } from '../lib/mastery';
 import { uniqueLetters, LETTERS } from '../data/letters';
 import { ProgressDots } from './ui';
 import { playCorrect, playWrong } from '../lib/sound';
-import { withNikud } from '../data/nikud';
+import { withNikud, forHandwriting } from '../data/nikud';
 
 // סיפור עם קו מפריד נגרר: מימין לקו — כתב רגיל, משמאלו — כתב יד.
 // (שחזור של רכיב ה"השוואה" מהאתר המקורי, בלי תמונות — טקסט חי)
@@ -44,7 +44,7 @@ export default function Story({
         className="agol-font"
         style={{ gridArea: '1 / 1', margin: 0, padding: '0 28px', fontSize: 25, lineHeight: LINE_H }}
       >
-        {withNikud(text)}
+        {forHandwriting(text)}
       </p>
       <p
         style={{
