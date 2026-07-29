@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import type { BubblesActivity, ActivityResult, LetterEvents } from '../data/types';
 import { addLetterEvent } from '../lib/mastery';
 import { uniqueLetters } from '../data/letters';
+import { withNikud } from '../data/nikud';
 import { playCorrect, playTap, playWrong } from '../lib/sound';
 
 interface Bubble {
@@ -368,7 +369,7 @@ export default function Bubbles({
                 transition: isDrag ? 'none' : 'box-shadow 0.15s, border-color 0.15s, transform 0.15s',
               }}
             >
-              {b.text}
+              {withNikud(b.text)}
             </button>
           );
         })}

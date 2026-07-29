@@ -3,8 +3,9 @@ import type { PaintActivity, ActivityResult, LetterEvents } from '../data/types'
 import { addTextEvents } from '../lib/mastery';
 import { ProgressDots } from './ui';
 import { playCorrect, playWrong } from '../lib/sound';
+import { withNikud } from '../data/nikud';
 
-// ציור לפי הוראות: כל הוראה כתובה בכתב רש"י. צובעים משבצות ובודקים.
+// ציור לפי הוראות: כל הוראה כתובה בכתב יד. צובעים משבצות ובודקים.
 
 export default function Paint({
   activity,
@@ -83,7 +84,7 @@ export default function Paint({
             marginBottom: 16,
           }}
         >
-          {s.text}
+          {withNikud(s.text)}
         </div>
       ) : (
         <div className="pop-in" style={{ fontSize: 30, marginBottom: 10 }}>

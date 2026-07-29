@@ -4,8 +4,9 @@ import { addLetterEvent } from '../lib/mastery';
 import { uniqueLetters, LETTERS } from '../data/letters';
 import { ProgressDots } from './ui';
 import { playCorrect, playWrong } from '../lib/sound';
+import { withNikud } from '../data/nikud';
 
-// סיפור עם קו מפריד נגרר: מימין לקו — כתב רגיל, משמאלו — כתב רש"י.
+// סיפור עם קו מפריד נגרר: מימין לקו — כתב רגיל, משמאלו — כתב יד.
 // (שחזור של רכיב ה"השוואה" מהאתר המקורי, בלי תמונות — טקסט חי)
 
 const HARD = new Set(LETTERS.filter((l) => l.hard).map((l) => l.ch));
@@ -43,7 +44,7 @@ export default function Story({
         className="agol-font"
         style={{ gridArea: '1 / 1', margin: 0, padding: '0 28px', fontSize: 25, lineHeight: LINE_H }}
       >
-        {text}
+        {withNikud(text)}
       </p>
       <p
         style={{
@@ -52,12 +53,12 @@ export default function Story({
           padding: '0 28px',
           fontSize: 20,
           fontWeight: 500,
-          lineHeight: (25 * LINE_H) / 20, // אותו גובה שורה בפיקסלים כמו שכבת הרש"י
+          lineHeight: (25 * LINE_H) / 20, // אותו גובה שורה בפיקסלים כמו שכבת כתב היד
           background: '#fff',
           clipPath: `inset(0 0 0 ${pos * 100}%)`,
         }}
       >
-        {text}
+        {withNikud(text)}
       </p>
     </div>
   );

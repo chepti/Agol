@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import type { FlashcardsActivity, ActivityResult, LetterEvents } from '../data/types';
 import { addLetterEvent } from '../lib/mastery';
 import { hebrewLetters, uniqueLetters } from '../data/letters';
+import { stripNikud } from '../data/nikud';
 import { ProgressDots, AgolCard } from './ui';
 import { playCorrect, playWrong } from '../lib/sound';
 
-// כרטיס תמלול: מילה בכתב רש"י — מקלידים בכתב רגיל.
+// כרטיס תמלול: מילה בכתב יד — מקלידים בכתב רגיל (בלי ניקוד).
 
 function normalize(s: string): string {
-  return s.replace(/\s+/g, ' ').trim();
+  return stripNikud(s).replace(/\s+/g, ' ').trim();
 }
 
 /** אילו אותיות מהתשובה חסרות/שגויות בקלט (לפי ספירת מופעים) */

@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import type { MatchActivity, ActivityResult, LetterEvents } from '../data/types';
 import { addLetterEvent } from '../lib/mastery';
 import { uniqueLetters } from '../data/letters';
+import { withNikud } from '../data/nikud';
 import { playCorrect, playWrong } from '../lib/sound';
 
 // התאמה: בוחרים מילה בכתב רגיל ומניחים אותה על המילה המתאימה בכתב רש"י.
@@ -75,7 +76,7 @@ export default function Match({
                 transform: selected === p.i ? 'scale(1.07)' : 'none',
               }}
             >
-              {p.label ?? p.agol}
+              {p.label ?? withNikud(p.agol)}
             </button>
           )
         )}
@@ -104,10 +105,10 @@ export default function Match({
                 transition: 'all 0.2s',
               }}
             >
-              <span>{p.agol}</span>
+              <span>{withNikud(p.agol)}</span>
               {isDone && (
                 <span style={{ fontFamily: 'Heebo', fontSize: 18, fontWeight: 700, color: 'var(--green)' }}>
-                  = {p.label ?? p.agol} ✓
+                  = {p.label ?? withNikud(p.agol)} ✓
                 </span>
               )}
             </button>

@@ -9,7 +9,8 @@ import { nav } from '../App';
 // שומרים (מקומית, נכנס מיד לפעילות) ומעתיקים קוד להטמעה קבועה.
 
 const SIZE = 340;
-const FONT_PX = 250;
+const FONT_PX = 220;
+const BASELINE_Y = SIZE * 0.58;
 
 export default function TraceEdit() {
   const [letter, setLetter] = useState('א');
@@ -23,7 +24,7 @@ export default function TraceEdit() {
   const cur = useRef<StrokePt[]>([]);
 
   useEffect(() => {
-    document.fonts.load(`600 ${FONT_PX}px Agol`).then(() => setFontReady(true));
+    document.fonts.load(`700 ${FONT_PX}px Agol`).then(() => setFontReady(true));
   }, []);
 
   // טעינת מסלול קיים בבחירת אות
@@ -36,12 +37,29 @@ export default function TraceEdit() {
     const ctx = canvasRef.current?.getContext('2d');
     if (!ctx) return;
     ctx.clearRect(0, 0, SIZE, SIZE);
-    // האות ברקע
-    ctx.font = `600 ${FONT_PX}px Agol`;
+    // קווי מחברת
+    const lines = [
+      { y: 0.20, dash: true, w: 1.5, c: '#b7d7e8' },
+      { y: 0.32, dash: false, w: 2, c: '#8ec5dc' },
+      { y: 0.58, dash: false, w: 2.5, c: '#5a9fb8' },
+      { y: 0.78, dash: true, w: 1.5, c: '#b7d7e8' },
+    ];
+    lines.forEach((ln) => {
+      ctx.beginPath();
+      ctx.setLineDash(ln.dash ? [6, 6] : []);
+      ctx.strokeStyle = ln.c;
+      ctx.lineWidth = ln.w;
+      ctx.moveTo(SIZE * 0.05, SIZE * ln.y);
+      ctx.lineTo(SIZE * 0.95, SIZE * ln.y);
+      ctx.stroke();
+    });
+    ctx.setLineDash([]);
+    // האות ברקע — יושבת על קו הבסיס
+    ctx.font = `700 ${FONT_PX}px Agol`;
     ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
+    ctx.textBaseline = 'alphabetic';
     ctx.fillStyle = '#cfe6f2';
-    ctx.fillText(letter, SIZE / 2, SIZE / 2 + 8);
+    ctx.fillText(letter, SIZE / 2, BASELINE_Y);
     // המשיכות שנשמרו + הנוכחית
     const all = [...strokes, cur.current.length ? cur.current : []].filter((s) => s.length);
     all.forEach((st, si) => {
@@ -55,16 +73,17 @@ export default function TraceEdit() {
         if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
       });
       ctx.stroke();
-      // מספר + נקודת התחלה
       const s0 = st[0];
       ctx.beginPath();
       ctx.arc(s0[0] * SIZE, s0[1] * SIZE, 13, 0, Math.PI * 2);
       ctx.fillStyle = '#16a34a';
       ctx.fill();
       ctx.fillStyle = '#fff';
+      ctx.textBaseline = 'middle';
       ctx.font = '700 15px Heebo';
       ctx.fillText(String(si + 1), s0[0] * SIZE, s0[1] * SIZE + 1);
-      ctx.font = `600 ${FONT_PX}px Agol`;
+      ctx.font = `700 ${FONT_PX}px Agol`;
+      ctx.textBaseline = 'alphabetic';
     });
   };
 

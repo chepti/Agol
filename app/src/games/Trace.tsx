@@ -12,11 +12,19 @@ import { getLetterStrokes } from '../data/strokes';
 // והמעבר לאות הבאה אוטומטי כשהציור מדויק מספיק — בלי כפתור.
 
 const SIZE = 340;
-const FONT_PX = 250;
+const FONT_PX = 220;
 const INK_W = 17;
 const HIT_W = 42;
-const COVER_PASS = 0.7;    // כמה מהאות צריך לכסות
-const STRAY_MAX = 0.4;     // כמה מהקו מותר שיחרוג
+const COVER_PASS = 0.7;
+const STRAY_MAX = 0.4;
+
+/** קווי מחברת — אחוזים מגובה הקנבס */
+const LINE = {
+  ascender: 0.20, // קו עליון (ל׳ בולטת מעליו)
+  bodyTop: 0.32,  // ראש גוף האות
+  baseline: 0.58, // קו הבסיס — האות יושבת עליו
+  descender: 0.78, // קו תחתון (ן׳ ך׳ ף׳ ץ׳ יורדות אליו)
+};
 
 interface Pt { x: number; y: number }
 interface Mask {
@@ -25,21 +33,25 @@ interface Mask {
   glyphCount: number;
   bboxTop: number;
   bboxHeight: number;
-  strokes: Pt[][];  // המשיכות להדגמה, בסדר ובכיוון הכתיבה
+  strokes: Pt[][];
+}
+
+function letterY(): number {
+  return SIZE * LINE.baseline;
 }
 
 function buildMask(letter: string): Mask {
   const off = document.createElement('canvas');
   off.width = SIZE; off.height = SIZE;
   const ctx = off.getContext('2d')!;
-  ctx.font = `600 ${FONT_PX}px Agol`;
+  ctx.font = `700 ${FONT_PX}px Agol`;
   ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillText(letter, SIZE / 2, SIZE / 2 + 8);
+  ctx.textBaseline = 'alphabetic';
+  ctx.fillText(letter, SIZE / 2, letterY());
   const g = ctx.getImageData(0, 0, SIZE, SIZE).data;
 
   ctx.lineWidth = 30;
-  ctx.strokeText(letter, SIZE / 2, SIZE / 2 + 8);
+  ctx.strokeText(letter, SIZE / 2, letterY());
   const t = ctx.getImageData(0, 0, SIZE, SIZE).data;
 
   const glyph = new Uint8Array(SIZE * SIZE);
@@ -57,8 +69,6 @@ function buildMask(letter: string): Mask {
     if (t[i * 4 + 3] > 30) tolerant[i] = 1;
   }
 
-  // מסלול מודגם: אם יש מסלול מצויר לאות — משתמשים בו (סדר וכיוון אמיתיים);
-  // אחרת שלד אוטומטי — לכל שורה ה-x החציוני, מלמעלה למטה.
   const authored = getLetterStrokes(letter);
   let strokes: Pt[][];
   if (authored && authored.length) {
@@ -111,7 +121,7 @@ export default function Trace({
 
   useEffect(() => {
     let alive = true;
-    document.fonts.load(`600 ${FONT_PX}px Agol`).then(() => alive && setFontReady(true));
+    document.fonts.load(`700 ${FONT_PX}px Agol`).then(() => alive && setFontReady(true));
     return () => { alive = false; };
   }, []);
 
@@ -119,11 +129,11 @@ export default function Trace({
     const mask = maskRef.current!;
     const ctx = tplRef.current!.getContext('2d')!;
     ctx.clearRect(0, 0, SIZE, SIZE);
-    ctx.font = `600 ${FONT_PX}px Agol`;
+    ctx.font = `700 ${FONT_PX}px Agol`;
     ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
+    ctx.textBaseline = 'alphabetic';
     ctx.fillStyle = '#cfe6f2';
-    ctx.fillText(letter, SIZE / 2, SIZE / 2 + 8);
+    ctx.fillText(letter, SIZE / 2, letterY());
     // נקודת התחלה — ראש המשיכה הראשונה
     const s = mask.strokes[0][0];
     ctx.beginPath();
@@ -324,8 +334,10 @@ export default function Trace({
           overflow: 'hidden',
         }}
       >
-        <div aria-hidden style={{ position: 'absolute', left: 0, right: 0, top: '26%', borderTop: '1.5px dashed #bcdff0' }} />
-        <div aria-hidden style={{ position: 'absolute', left: 0, right: 0, bottom: '20%', borderTop: '1.5px dashed #bcdff0' }} />
+        <div aria-hidden style={{ position: 'absolute', left: '6%', right: '6%', top: `${LINE.ascender * 100}%`, borderTop: '1.5px dashed #b7d7e8' }} />
+        <div aria-hidden style={{ position: 'absolute', left: '4%', right: '4%', top: `${LINE.bodyTop * 100}%`, borderTop: '2px solid #8ec5dc' }} />
+        <div aria-hidden style={{ position: 'absolute', left: '4%', right: '4%', top: `${LINE.baseline * 100}%`, borderTop: '2.5px solid #5a9fb8' }} title="קו בסיס" />
+        <div aria-hidden style={{ position: 'absolute', left: '6%', right: '6%', top: `${LINE.descender * 100}%`, borderTop: '1.5px dashed #b7d7e8' }} />
         <canvas ref={tplRef} width={SIZE} height={SIZE} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} />
         <canvas
           ref={inkRef}

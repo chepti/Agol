@@ -4,6 +4,7 @@ import { addTextEvents, addLetterEvent } from '../lib/mastery';
 import { uniqueLetters } from '../data/letters';
 import { ProgressDots, AgolCard } from './ui';
 import { playCorrect, playWrong } from '../lib/sound';
+import { withNikud } from '../data/nikud';
 
 export default function Quiz({
   activity,
@@ -80,14 +81,14 @@ export default function Quiz({
                 transition: 'all 0.15s',
               }}
             >
-              {opt}
+              {withNikud(opt)}
             </button>
           );
         })}
       </div>
       {chosen !== null && chosen !== q.correct && (
         <p className="float-up" style={{ color: 'var(--red)', fontWeight: 700 }}>
-          התשובה הנכונה: {q.options[q.correct]}
+          התשובה הנכונה: {withNikud(q.options[q.correct])}
         </p>
       )}
       {chosen !== null && chosen === q.correct && (
