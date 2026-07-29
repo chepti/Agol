@@ -91,18 +91,25 @@ export default function Memory({
     }
   };
 
-  const cols = activity.pairs.length <= 3 ? 3 : activity.pairs.length <= 4 ? 4 : 'auto-fill';
-  const minW = activity.pairs.some((p) => p.a.length > 4) ? 110 : 88;
+  const pairCount = activity.pairs.length;
+  const cardCount = pairCount * 2;
+  // במסך רחב: כמה עמודות נוחות לפי מספר הקלפים
+  const cols =
+    cardCount <= 6 ? Math.min(cardCount, 3) :
+    cardCount <= 8 ? 4 :
+    cardCount <= 12 ? 6 :
+    6;
+  const longWords = activity.pairs.some((p) => p.a.length > 4);
 
   return (
-    <div style={{ textAlign: 'center' }}>
+    <div style={{ textAlign: 'center', width: '100%' }}>
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns:
-            typeof cols === 'number' ? `repeat(${cols}, minmax(${minW}px, 1fr))` : `repeat(auto-fill, minmax(${minW}px, 1fr))`,
-          gap: 12,
-          maxWidth: activity.pairs.length <= 4 ? 420 : 640,
+          gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
+          gap: 'clamp(10px, 1.4vw, 18px)',
+          width: '100%',
+          maxWidth: cols <= 3 ? 560 : cols <= 4 ? 780 : 1080,
           margin: '0 auto',
         }}
       >
@@ -110,6 +117,11 @@ export default function Memory({
           const isMatched = matched.has(card.pair);
           const isOpen = open.includes(card.id) || isMatched;
           const isPop = popping.has(card.pair);
+          const openSize = isOpen
+            ? (card.text.length > 3
+              ? (card.agol ? 'clamp(26px, 3.2vw, 40px)' : 'clamp(18px, 2.4vw, 28px)')
+              : (card.agol ? 'clamp(36px, 4.5vw, 56px)' : 'clamp(26px, 3.2vw, 40px)'))
+            : 'clamp(28px, 3.5vw, 42px)';
           return (
             <button
               key={card.id}
@@ -119,8 +131,9 @@ export default function Memory({
               className={`${card.agol && isOpen ? 'agol-font ' : ''}${isOpen && !isMatched ? 'flip-in' : ''}${isPop ? ' memory-pop' : ''}`}
               aria-label={isOpen ? card.text : 'קלף סגור'}
               style={{
-                minHeight: 96,
-                borderRadius: 18,
+                aspectRatio: longWords ? '5 / 4' : '1 / 1',
+                minHeight: 'clamp(100px, 14vw, 148px)',
+                borderRadius: 20,
                 border: `3px solid ${isMatched ? '#86efac' : isOpen ? 'var(--teal)' : '#7dd3c0'}`,
                 background: isMatched
                   ? 'linear-gradient(160deg,#dcfce7,#bbf7d0)'
@@ -130,15 +143,18 @@ export default function Memory({
                       : 'linear-gradient(160deg,#fffbeb,#fef3c7)'
                     : 'linear-gradient(145deg,#14b8a6,#0f766e)',
                 color: isOpen ? 'var(--ink)' : '#fff',
-                fontSize: isOpen ? (card.text.length > 3 ? (card.agol ? 28 : 20) : card.agol ? 42 : 28) : 30,
-                fontWeight: isOpen && !card.agol ? 800 : 400,
-                padding: 8,
-                lineHeight: 1.2,
+                fontSize: openSize,
+                fontWeight: isOpen && !card.agol ? 800 : 700,
+                padding: 'clamp(8px, 1.2vw, 14px)',
+                lineHeight: 1.15,
                 cursor: isMatched ? 'default' : 'pointer',
                 boxShadow: isOpen ? '0 4px 14px rgba(15,118,110,0.18)' : '0 6px 0 #0d5c56, 0 8px 16px rgba(0,0,0,0.15)',
-                transform: isMatched ? 'scale(0.92)' : undefined,
+                transform: isMatched ? 'scale(0.94)' : undefined,
                 opacity: isMatched ? 0.75 : 1,
                 transition: 'transform 0.25s, opacity 0.35s, background 0.2s',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
             >
               {isOpen ? (card.agol ? forHandwriting(card.text) : withNikud(card.text)) : BACKS[idx % BACKS.length]}

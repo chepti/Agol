@@ -149,7 +149,7 @@ export default function WordSearch({
   };
 
   const activePath = new Set(pathCells().map(([r, c]) => key(r, c)));
-  const cellSize = Math.min(44, Math.floor(340 / n));
+  const cellSize = Math.min(56, Math.max(36, Math.floor(Math.min(560, typeof window !== 'undefined' ? window.innerWidth * 0.7 : 560) / n)));
 
   return (
     <div style={{ textAlign: 'center' }}>

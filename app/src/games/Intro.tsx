@@ -26,8 +26,8 @@ export default function Intro({
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))',
-          gap: 14,
+          gridTemplateColumns: 'repeat(auto-fill, minmax(min(160px, 42vw), 1fr))',
+          gap: 16,
         }}
       >
         {activity.letters.map((ch) => {
@@ -42,7 +42,7 @@ export default function Intro({
                 borderRadius: 16,
                 padding: '16px 8px',
                 background: isFlipped ? 'var(--teal-soft)' : 'linear-gradient(160deg,#f4fbff,#d7eefb)',
-                minHeight: 150,
+                minHeight: 170,
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',

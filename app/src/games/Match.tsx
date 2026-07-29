@@ -65,9 +65,9 @@ export default function Match({
               key={p.i}
               onClick={() => setSelected(selected === p.i ? null : p.i)}
               style={{
-                padding: '10px 20px',
-                borderRadius: 12,
-                fontSize: 19,
+                padding: '12px 24px',
+                borderRadius: 14,
+                fontSize: 'clamp(18px, 2.2vw, 22px)',
                 fontWeight: 700,
                 background: selected === p.i ? 'var(--teal)' : '#fff',
                 color: selected === p.i ? '#fff' : 'var(--ink)',
@@ -81,7 +81,7 @@ export default function Match({
           )
         )}
       </div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 10, maxWidth: 480, margin: '0 auto' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 12, maxWidth: 720, margin: '0 auto', width: '100%' }}>
         {activity.pairs.map((p, i) => {
           const isDone = placed.has(i);
           return (
@@ -91,9 +91,9 @@ export default function Match({
               className={`agol-font ${wrongTarget === i ? 'shake' : ''}`}
               disabled={isDone}
               style={{
-                padding: '12px 18px',
-                borderRadius: 14,
-                fontSize: 28,
+                padding: '16px 22px',
+                borderRadius: 16,
+                fontSize: 'clamp(26px, 3.2vw, 36px)',
                 textAlign: 'center',
                 background: isDone ? 'var(--green-soft)' : wrongTarget === i ? 'var(--red-soft)' : 'linear-gradient(160deg,#f4fbff,#d7eefb)',
                 border: `2px solid ${isDone ? 'var(--green)' : '#a9d8ee'}`,

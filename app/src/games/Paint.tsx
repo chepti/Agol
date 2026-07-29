@@ -65,7 +65,7 @@ export default function Paint({
     }
   };
 
-  const cellSize = Math.min(46, Math.floor(320 / (n + 1)));
+  const cellSize = Math.min(58, Math.floor(480 / (n + 1)));
 
   return (
     <div style={{ textAlign: 'center' }}>

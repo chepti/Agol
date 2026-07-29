@@ -85,7 +85,7 @@ export default function Flashcards({
           if (state === 'typing') check();
           else next();
         }}
-        style={{ maxWidth: 420, margin: '0 auto' }}
+        style={{ maxWidth: 520, margin: '0 auto', width: '100%' }}
       >
         <input
           className={`field ${state === 'wrong' ? 'shake' : ''}`}

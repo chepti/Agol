@@ -37,9 +37,18 @@ export default function PlayView({
     nav('/map');
   };
 
+  const wide =
+    activity.type === 'bubbles' ||
+    activity.type === 'memory' ||
+    activity.type === 'match' ||
+    activity.type === 'intro' ||
+    activity.type === 'wordsearch' ||
+    activity.type === 'order' ||
+    activity.type === 'paint';
+
   return (
     <SoftPageShell seed={activity.id}>
-      <div style={{ maxWidth: activity.type === 'bubbles' ? 960 : 760, margin: '0 auto', padding: '20px 16px 60px' }}>
+      <div style={{ maxWidth: wide ? 1120 : 820, margin: '0 auto', padding: '16px 20px 60px', width: '100%' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10, marginBottom: 4, flexWrap: 'wrap' }}>
           <button
             className="btn small"

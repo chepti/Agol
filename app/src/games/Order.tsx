@@ -72,7 +72,7 @@ export default function Order({
           borderRadius: 14,
           padding: 8,
           margin: '10px auto 22px',
-          maxWidth: 620,
+          maxWidth: 900,
           direction: 'rtl',
         }}
       >
@@ -81,12 +81,12 @@ export default function Order({
             key={ch}
             className="agol-font pop-in"
             style={{
-              width: 40,
-              height: 44,
+              width: 52,
+              height: 56,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: 27,
+              fontSize: 34,
               background: '#fff',
               borderRadius: 8,
               border: '2px solid var(--green)',
@@ -98,16 +98,16 @@ export default function Order({
         {placed.length === 0 && <span style={{ color: 'var(--ink-soft)', alignSelf: 'center' }}>כאן ייבנה האלף-בית שלכם...</span>}
       </div>
       {/* המאגר המעורבב */}
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center', maxWidth: 620, margin: '0 auto', direction: 'rtl' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, justifyContent: 'center', maxWidth: 900, margin: '0 auto', direction: 'rtl' }}>
         {remaining.map((ch) => (
           <button
             key={ch}
             onClick={() => clickLetter(ch)}
             className={`agol-font ${wrongCh === ch ? 'shake' : ''}`}
             style={{
-              width: 52,
-              height: 56,
-              fontSize: 32,
+              width: 64,
+              height: 68,
+              fontSize: 38,
               borderRadius: 10,
               background: wrongCh === ch ? 'var(--red-soft)' : 'linear-gradient(160deg,#f4fbff,#d7eefb)',
               border: `2px solid ${wrongCh === ch ? 'var(--red)' : '#a9d8ee'}`,

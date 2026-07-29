@@ -311,7 +311,7 @@ export default function Trace({
   const barColor = fillPct >= COVER_PASS * 100 ? 'var(--green)' : fillPct > 30 ? 'var(--teal)' : '#94a3b8';
 
   return (
-    <div style={{ textAlign: 'center', maxWidth: 460, margin: '0 auto' }}>
+    <div style={{ textAlign: 'center', maxWidth: 560, margin: '0 auto', width: '100%' }}>
       <ProgressDots total={activity.letters.length} done={idx} />
       <p style={{ fontSize: 18, fontWeight: 700, margin: '4px 0 12px' }}>
         ציירו את האות <span className="agol-font" style={{ color: 'var(--teal)', fontSize: 30 }}>{letter}</span>

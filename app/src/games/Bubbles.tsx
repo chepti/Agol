@@ -73,7 +73,7 @@ export default function Bubbles({
         pair: i,
         text,
         agol: true,
-        size: text.length > 3 ? 86 : 98,
+        size: text.length > 3 ? 104 : 118,
         hue: HUES[i % HUES.length],
         delay: Math.random() * 2,
         dur: 3.5 + Math.random() * 2.5,
@@ -83,7 +83,7 @@ export default function Bubbles({
         pair: i,
         text: label,
         agol: false,
-        size: label.length > 3 ? 86 : 98,
+        size: label.length > 3 ? 104 : 118,
         hue: HUES[i % HUES.length],
         delay: Math.random() * 2,
         dur: 3.5 + Math.random() * 2.5,
@@ -107,7 +107,7 @@ export default function Bubbles({
   const [shakeId, setShakeId] = useState<number | null>(null);
   const [nearId, setNearId] = useState<number | null>(null);
   const [dragId, setDragId] = useState<number | null>(null);
-  const [pondH, setPondH] = useState(520);
+  const [pondH, setPondH] = useState(580);
   const [events] = useState<LetterEvents>({});
   const finished = useRef(false);
   const mistakesRef = useRef(0);
@@ -119,7 +119,7 @@ export default function Bubbles({
   goneRef.current = gone;
 
   useEffect(() => {
-    const sync = () => setPondH(Math.max(460, Math.min(window.innerHeight * 0.64, 640)));
+    const sync = () => setPondH(Math.max(500, Math.min(window.innerHeight * 0.7, 720)));
     sync();
     window.addEventListener('resize', sync);
     return () => window.removeEventListener('resize', sync);
@@ -298,7 +298,7 @@ export default function Bubbles({
         style={{
           position: 'relative',
           width: '100%',
-          maxWidth: 920,
+          maxWidth: 1080,
           height: pondH,
           margin: '0 auto',
           borderRadius: 28,
